@@ -2,6 +2,7 @@
 ___________________
 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/interactions-get?color=blue&style=for-the-badge)
+
 This is a temporary extension for interactions.py, until it gets its own `get` implementation. This `get`-method 
 will only get objects via a HTTP call, not from cache.
 
