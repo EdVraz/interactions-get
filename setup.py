@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as ld:
 
 setup(
     name="interactions-get",
-    version="1.0.2",
+    version="1.0.3",
     description="Get method for interactions.py",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -14,6 +14,7 @@ setup(
     author_email="edvraz12@gmail.com",
     license="MIT",
     packages=["interactions.ext.get"],
+    package_data={'interactions.ext.get': ['*.pyi']},
     classifiers=[
         "Programming Language :: Python :: 3",
         "Development Status :: 4 - Beta",
