@@ -1,14 +1,14 @@
 from typing import overload, Type, TypeVar, List
 
-from .bot import Client
+from interactions.client.bot import Client
 
-from ..api.models.channel import Channel
-from ..api.models.guild import Guild
-from ..api.models.member import Member
-from ..api.models.message import Message, Emoji, Sticker
-from ..api.models.role import Role
-from ..api.models.user import User
-from ..api.models.webhook import Webhook
+from interactions.api.models.channel import Channel
+from interactions.api.models.guild import Guild
+from interactions.api.models.member import Member
+from interactions.api.models.message import Message, Emoji, Sticker
+from interactions.api.models.role import Role
+from interactions.api.models.user import User
+from interactions.api.models.webhook import Webhook
 
 _T = TypeVar("_T")
 

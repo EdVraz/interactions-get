@@ -1,10 +1,10 @@
 from typing import List, Type, TypeVar, Union, _GenericAlias, get_args
 
-from ..api.models.channel import Channel
-from ..api.models.guild import Guild
-from ..api.models.message import Emoji
-from ..api.models.role import Role
-from .bot import Client
+from interactions.api.models.channel import Channel
+from interactions.api.models.guild import Guild
+from interactions.api.models.message import Emoji
+from interactions.api.models.role import Role
+from interactions.client.bot import Client
 
 _T = TypeVar("_T")
 
