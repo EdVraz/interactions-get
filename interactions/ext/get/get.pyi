@@ -1,4 +1,4 @@
-from typing import overload, Type, TypeVar, List
+from typing import overload, Type, TypeVar, List, Iterable, Optional
 
 from interactions.client.bot import Client
 
@@ -11,6 +11,10 @@ from interactions.api.models.user import User
 from interactions.api.models.webhook import Webhook
 
 _T = TypeVar("_T")
+
+# not HTTP related
+@overload
+async def get(item: Iterable, *, id: Optional[int] = None, name: Optional[str] = None) -> _T: ...
 
 # single objects
 @overload
@@ -37,6 +41,7 @@ async def get(client: Client, obj: Type[Sticker], *, sticker_id: int) -> Sticker
 async def get(client: Client, obj: Type[User], *, user_id: int) -> User: ...
 @overload
 async def get(client: Client, obj: Type[Webhook], *, webhook_id: int) -> Webhook: ...
+
 # list of objects
 @overload
 async def get(client: Client, obj: Type[List[Channel]], *, channel_ids: List[int]) -> List[Channel]: ...
