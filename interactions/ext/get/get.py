@@ -1,4 +1,5 @@
 from typing import List, Type, TypeVar, Union, _GenericAlias, get_args, Iterable
+from inspect import isfunction
 
 from interactions.api.models.channel import Channel
 from interactions.api.models.guild import Guild
@@ -69,20 +70,29 @@ async def get(*args, **kwargs):
         return obj(**_obj, _client=client._http)
 
     elif len(args) == 1:
+
+        def run_check(_obj, _check):
+            return _check(_obj)
+
         item: Iterable = args[0]
         if not isinstance(item, Iterable):
             raise TypeError("The specified item must be an iterable!")
 
         if not kwargs:
-            raise ValueError("You have to specify either the name or id to search for!")
+            raise ValueError("You have to specify either the name, id or a custom check to check against!")
 
         if len(list(kwargs)) > 1:
-            raise ValueError("Only one key word argument to search for is allowed!")
+            raise ValueError("Only one keyword argument to check against is allowed!")
 
         _arg = str(list(kwargs)[0])
 
         try:
-            __obj = next(_ for _ in item if str(getattr(_, _arg, None)) == str(kwargs.get(_arg)))
+            __obj = next(
+                _ for _ in item if (
+                    str(getattr(_, _arg, None)) == str(kwargs.get(_arg))
+                    if not isfunction(kwargs.get(_arg)) else run_check(item, kwargs.get(_arg))
+                )
+            )
             return __obj
         except StopIteration:
             log.warning("Could not retrieve any matching item!")

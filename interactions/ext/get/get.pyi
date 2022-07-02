@@ -1,4 +1,4 @@
-from typing import overload, Type, TypeVar, List, Iterable, Optional
+from typing import overload, Type, TypeVar, List, Iterable, Optional, Callable
 
 from interactions.client.bot import Client
 
@@ -14,7 +14,9 @@ _T = TypeVar("_T")
 
 # not HTTP related
 @overload
-async def get(item: Iterable, *, id: Optional[int] = None, name: Optional[str] = None) -> _T: ...
+async def get(
+        item: Iterable, *, id: Optional[int] = None, name: Optional[str] = None, check: Callable[..., bool]
+) -> _T: ...
 
 # single objects
 @overload
