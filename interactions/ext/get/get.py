@@ -1,5 +1,6 @@
 from typing import List, Type, TypeVar, Union, _GenericAlias, get_args, Iterable
 from inspect import isfunction
+from warnings import warn
 
 from interactions.api.models.channel import Channel
 from interactions.api.models.guild import Guild
@@ -15,6 +16,12 @@ _T = TypeVar("_T")
 
 async def get(*args, **kwargs):
     # sourcery no-metrics
+
+    warn(
+        "This ext has been deprecated. Please use the `get` method from the core `interactions` library",
+        DeprecationWarning
+    )
+
     if len(args) == 2 and any(isinstance(_, Iterable) for _ in args):
         raise TypeError("You can only use Iterables as single-argument!")
 
